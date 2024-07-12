@@ -1,12 +1,12 @@
 import { baseApi } from "./base"
-import { User } from '../interfaces'
+import { User } from "../interfaces"
 
 export const usersApi = baseApi.injectEndpoints({
-  endpoints: build => ({
+  endpoints: (build) => ({
     getUsers: build.query<User[], void>({
-      query: () => ({ url: '/users' })
-    })
-  })
+      query: () => ({ url: "/users" }),
+    }),
+  }),
 })
 
 export const { useGetUsersQuery } = usersApi

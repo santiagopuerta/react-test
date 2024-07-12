@@ -1,1 +1,1 @@
-export * from './PostProps'
+export * from "./PostProps"

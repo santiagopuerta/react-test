@@ -1,8 +1,7 @@
-import Post from './Post'
-import Loader from './Loader'
-import { anonymousUser } from '../configs/constants'
-import { useGetPostsQuery, useGetUsersQuery } from '../services'
-
+import Post from "./Post"
+import Loader from "./Loader"
+import { anonymousUser } from "../configs/constants"
+import { useGetPostsQuery, useGetUsersQuery } from "../services"
 
 export function PostList() {
   const { data: posts, isLoading: postsLoading } = useGetPostsQuery()
@@ -16,14 +15,11 @@ export function PostList() {
 
   return (
     <>
-      {
-        posts.map((post, index) => {
-          const user = users.find(user => user.id === post.userId) || anonymousUser;
-          return (
-            <Post key={index} post={post} user={ user } />
-          )
-        })
-      }
+      {posts.map((post, index) => {
+        const user =
+          users.find((user) => user.id === post.userId) || anonymousUser
+        return <Post key={index} post={post} user={user} />
+      })}
     </>
   )
 }

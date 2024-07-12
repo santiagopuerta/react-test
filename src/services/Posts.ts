@@ -1,12 +1,12 @@
 import { baseApi } from "./base"
-import { Post } from '../interfaces'
+import { Post } from "../interfaces"
 
 export const postsApi = baseApi.injectEndpoints({
-  endpoints: build => ({
+  endpoints: (build) => ({
     getPosts: build.query<Post[], void>({
-      query: () => ({ url: '/posts' })
-    })
-  })
+      query: () => ({ url: "/posts" }),
+    }),
+  }),
 })
 
 export const { useGetPostsQuery } = postsApi

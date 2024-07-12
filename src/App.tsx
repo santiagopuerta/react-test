@@ -1,7 +1,7 @@
-import './assets/styles/main.scss';
-import { PostList } from './components/PostList'
-import { Provider } from 'react-redux'
-import { store } from './configs/store'
+import "./assets/styles/main.scss"
+import { PostList } from "./components/PostList"
+import { Provider } from "react-redux"
+import { store } from "./configs/store"
 
 function App() {
   return (
