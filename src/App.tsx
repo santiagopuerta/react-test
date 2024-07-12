@@ -1,11 +1,9 @@
-import { useState } from 'react'
 import './assets/styles/main.scss';
 import { PostList } from './components/PostList'
 import { Provider } from 'react-redux'
 import { store } from './configs/store'
 
 function App() {
-
   return (
     <>
       <Provider store={store}>

@@ -1,5 +1,5 @@
-import { PostListProps } from '../types';
 import Post from './Post'
+import Loader from './Loader'
 import { anonymousUser } from '../configs/constants'
 import { useGetPostsQuery, useGetUsersQuery } from '../services'
 
@@ -10,8 +10,11 @@ export function PostList() {
 
   const isLoading = postsLoading || usersLoading
 
+  if (isLoading) return <Loader />
 
-  return (!isLoading && posts && users) && (
+  if (!posts || !users) return <div>Something went wrong...</div>
+
+  return (
     <>
       {
         posts.map((post, index) => {
