@@ -4,9 +4,10 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom"
-import RouteConfig from "./RouteConfig"
+import { RouteConfig } from "./RouteConfig"
 import { RouteItem } from "../types"
 import NotFound from "../pages/404"
+import { getPathByName } from "./RouteConfig"
 
 export function AppRoutes() {
   return (
@@ -18,7 +19,11 @@ export function AppRoutes() {
           // Redirect to home if user is authenticated
           if (route.path === "/login" && localStorage.getItem("email")) {
             return (
-              <Route key={index} path="/login" element={<Navigate to="/" />} />
+              <Route
+                key={index}
+                path="/login"
+                element={<Navigate to={getPathByName("home")} />}
+              />
             )
           }
 
