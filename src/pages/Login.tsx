@@ -1,12 +1,16 @@
 import { FormEvent, useState } from "react"
 import { Layout } from "../components/Layout"
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { setUserEmail } from "../store/reducers/userSlice"
+import { getPathByName } from "../routes/RouteConfig"
 
 export function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
@@ -17,12 +21,13 @@ export function Login() {
     }
 
     localStorage.setItem("email", email)
+    dispatch(setUserEmail(email))
 
     setEmail("")
     setPassword("")
     setError("")
 
-    navigate("/")
+    navigate(getPathByName("home"))
   }
 
   return (

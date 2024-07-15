@@ -1,6 +1,6 @@
 import "./assets/styles/main.scss"
 import { Provider } from "react-redux"
-import { store } from "./configs/store"
+import { store } from "./store/configStore"
 
 import AppRoutes from "./routes/AppRoutes"
 

@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import {
   BrowserRouter as Router,
   Route,
@@ -8,8 +10,25 @@ import { RouteConfig } from "./RouteConfig"
 import { RouteItem } from "../types"
 import NotFound from "../pages/404"
 import { getPathByName } from "./RouteConfig"
+import { setUserEmail } from "../store/reducers/userSlice"
+import { RootState } from "../store/configStore"
 
 export function AppRoutes() {
+  const dispatch = useDispatch()
+  const userEmail = useSelector((state: RootState) =>
+    state.userState ? state.userState.userEmail : null,
+  )
+
+  useEffect(() => {
+    const emailFromLS = localStorage.getItem("email")
+
+    if (emailFromLS) {
+      dispatch(setUserEmail(emailFromLS))
+    }
+  }, [dispatch])
+
+  const isAuthenticated = userEmail !== null
+
   return (
     <Router>
       <Routes>
@@ -17,7 +36,7 @@ export function AppRoutes() {
           const Component = route.component
 
           // Redirect to home if user is authenticated
-          if (route.path === "/login" && localStorage.getItem("email")) {
+          if (route.path === "/login" && isAuthenticated) {
             return (
               <Route
                 key={index}

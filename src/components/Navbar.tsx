@@ -1,12 +1,16 @@
 import { Link, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { getPathByName } from "../routes/RouteConfig"
+import { clearUserEmail } from "../store/reducers/userSlice"
 
 export function Navbar() {
   const email = localStorage.getItem("email")
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleLogout = () => {
     localStorage.removeItem("email")
+    dispatch(clearUserEmail())
     navigate(getPathByName("login"))
   }
 
