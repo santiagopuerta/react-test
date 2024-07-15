@@ -1,7 +1,7 @@
-import { LayoutProps } from "../types"
+import { Layout } from "../interfaces"
 import NavBar from "./Navbar"
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children }: Layout) {
   return (
     <>
       <NavBar></NavBar>

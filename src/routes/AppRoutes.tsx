@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom"
 import { RouteConfig } from "./RouteConfig"
-import { RouteItem } from "../types"
+import { RouteItem } from "../interfaces"
 import NotFound from "../pages/404"
 import { getPathByName } from "./RouteConfig"
 import { setUserEmail } from "../store/reducers/userSlice"
