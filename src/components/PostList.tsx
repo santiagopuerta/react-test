@@ -20,10 +20,10 @@ export function PostList() {
   const isLoading = postsLoading || usersLoading
 
   useEffect(() => {
-    if (postsData && users) {
+    if (posts?.length === 0 && postsData && users) {
       dispatch(setPosts(postsData))
     }
-  }, [dispatch, postsData, users])
+  }, [dispatch, posts?.length, postsData, users])
 
   if (isLoading) return <Loader />
 
