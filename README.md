@@ -1,30 +1,50 @@
-# React + TypeScript + Vite
+# React Test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This test build an application with "cards" for the display of posts made by a user using React + TypeScript + Vite. The application use the free API [http://jsonplaceholder.typicode.com](http://jsonplaceholder.typicode.com) to get the posts and the users data.
 
-Currently, two official plugins are available:
+## Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application was built using the following technologies:
+- React
+- React Router
+- RTK Query
+- TypeScript
+- Vite
+- Bootstrap 5
+- SASS
+- Cypress
+- ESLint
+- Prettier
 
-## Expanding the ESLint configuration
+## Instalation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+You can run the following commands:
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+# Clone this repo
+git clone git@github.com:santiagopuerta/react-test.git
+cd react-test/
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+# Install the dependencies
+npm install
+
+# Configure the environment variables
+cp .env.example .env
+
+# Add in .env VITE_API_URL the backend URL in this case https://jsonplaceholder.typicode.com
+
+# Run the application
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Tests
+
+To run the tests you can use the following command:
+
+```bash
+npm run cypress-test
+```
+
+## Live Demo
+
+You can see a live demo of the application in the following link: [https://66963f037762e40008e0a88e--bespoke-biscochitos-e7519c.netlify.app/](https://66963f037762e40008e0a88e--bespoke-biscochitos-e7519c.netlify.app/) thanks to Netlifys.
