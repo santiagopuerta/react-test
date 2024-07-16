@@ -57,7 +57,11 @@ export function Navbar() {
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <a className="dropdown-item" onClick={handleLogout}>
+                      <a
+                        data-testid="logout-button"
+                        className="dropdown-item"
+                        onClick={handleLogout}
+                      >
                         Logout
                       </a>
                     </li>
