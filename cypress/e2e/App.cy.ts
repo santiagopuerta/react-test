@@ -61,4 +61,18 @@ describe("App", () => {
     cy.get('[data-testid="user-email"]').click()
     cy.get('[data-testid="logout-button"]').should("be.visible")
   })
+
+  it("Check if session is closed after clicking logout button", () => {
+    const userEmail = "test@test.com"
+    cy.visit(Cypress.env("BASE_URL") + "login")
+    cy.get('[data-testid="email-input"]').type(userEmail)
+    cy.get('[data-testid="login-form"]').submit()
+    cy.location("pathname").should("eq", "/")
+    cy.get('[data-testid="user-email"]').click()
+    cy.get('[data-testid="logout-button"]').click()
+    cy.get('[data-testid="user-email"]').should("not.exist")
+    cy.window().then((win) => {
+      expect(win.localStorage.getItem("email")).to.be.null
+    })
+  })
 })
