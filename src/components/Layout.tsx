@@ -1,4 +1,4 @@
-import { Layout as LayoutType} from "../interfaces"
+import { Layout as LayoutType } from "../interfaces"
 import NavBar from "./Navbar"
 
 export function Layout({ children }: LayoutType) {

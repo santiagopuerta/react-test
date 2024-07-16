@@ -20,7 +20,8 @@ export function Post({ post, user }: PostProps) {
     dispatch(deletePost(post.id))
   }
 
-  const handleEdit = () => {
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     dispatch(editPost({ id: post.id, userId: 0, ...editedPost }))
     setIsEditing(false)
   }
@@ -30,9 +31,10 @@ export function Post({ post, user }: PostProps) {
       <div className="card-body">
         {isEditing ? (
           <>
-            <form>
+            <form onSubmit={handleEdit}>
               <div className="form-group">
                 <input
+                  data-testid="post-title-input"
                   className="form-control"
                   value={editedPost.title}
                   onChange={(e) =>
@@ -42,6 +44,7 @@ export function Post({ post, user }: PostProps) {
               </div>
               <div className="form-group my-2">
                 <textarea
+                  data-testid="post-body-input"
                   className="form-control"
                   value={editedPost.body}
                   onChange={(e) =>
@@ -50,7 +53,11 @@ export function Post({ post, user }: PostProps) {
                 />
               </div>
 
-              <button className="btn btn-primary" onClick={handleEdit}>
+              <button
+                data-testid="post-edit-button"
+                className="btn btn-primary"
+                type="submit"
+              >
                 Save
               </button>
             </form>

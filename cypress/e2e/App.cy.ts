@@ -1,5 +1,5 @@
 describe("App", () => {
-	const USER_EMAIL = "test@test.com"
+  const USER_EMAIL = "test@test.com"
 
   beforeEach(() => {
     cy.visit(Cypress.env("BASE_URL"))
@@ -62,16 +62,61 @@ describe("App", () => {
     cy.get('[data-testid="logout-button"]').should("be.visible")
   })
 
-	it("Check if session is closed after clicking logout button", () => {
-    cy.visit(Cypress.env('BASE_URL') + 'login')
+  it("Check if session is closed after clicking logout button", () => {
+    cy.visit(Cypress.env("BASE_URL") + "login")
     cy.get('[data-testid="email-input"]').type(USER_EMAIL)
     cy.get('[data-testid="login-form"]').submit()
-    cy.location('pathname').should('eq', '/')
+    cy.location("pathname").should("eq", "/")
     cy.get('[data-testid="user-email"]').click()
     cy.get('[data-testid="logout-button"]').click()
-    cy.get('[data-testid="user-email"]').should('not.exist')
+    cy.get('[data-testid="user-email"]').should("not.exist")
     cy.window().then((win) => {
-        expect(win.localStorage.getItem('email')).to.be.null
+      expect(win.localStorage.getItem("email")).to.be.null
     })
-	})
+  })
+
+  it("Check if delete post button removes posts", () => {
+    cy.visit(Cypress.env("BASE_URL") + "login")
+    cy.get('[data-testid="email-input"]').type(USER_EMAIL)
+    cy.get('[data-testid="login-form"]').submit()
+    cy.location("pathname").should("eq", "/")
+
+    cy.get('[data-testid="post"]').then(($postsBefore) => {
+      const initialPostCount = $postsBefore.length
+
+      cy.get('[data-testid="post"]')
+        .first()
+        .within(() => {
+          cy.get('[data-testid="delete-button"]').click()
+        })
+
+      cy.get('[data-testid="post"]').should("have.length", initialPostCount - 1)
+    })
+  })
+
+  it("Check if edit post button edits posts", () => {
+    cy.visit(Cypress.env("BASE_URL") + "login")
+    cy.get('[data-testid="email-input"]').type(USER_EMAIL)
+    cy.get('[data-testid="login-form"]').submit()
+    cy.location("pathname").should("eq", "/")
+
+    cy.get('[data-testid="post"]')
+      .first()
+      .within(() => {
+        cy.get('[data-testid="edit-button"]').click()
+      })
+
+    const newPostTitle = "New title"
+    const newPostBody = "New content"
+    cy.get('[data-testid="post-title-input"]').clear().type(newPostTitle)
+    cy.get('[data-testid="post-body-input"]').clear().type(newPostBody)
+    cy.get('[data-testid="post-edit-button"]').click()
+
+    cy.get('[data-testid="post"]')
+      .first()
+      .within(() => {
+        cy.get('[data-testid="post-title"]').should("contain", newPostTitle)
+        cy.get('[data-testid="post-body"]').should("contain", newPostBody)
+      })
+  })
 })
