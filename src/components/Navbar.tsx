@@ -15,7 +15,10 @@ export function Navbar() {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      data-testid="navbar"
+      className="navbar navbar-expand-lg navbar-light bg-light"
+    >
       <div className="container">
         <button
           className="navbar-toggler"
@@ -45,6 +48,7 @@ export function Navbar() {
               <ul className="navbar-nav">
                 <li className="nav-item dropdown">
                   <a
+                    data-testid="user-email"
                     className="nav-link dropdown-toggle"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -62,7 +66,11 @@ export function Navbar() {
               </ul>
             ) : (
               <li className="nav-item">
-                <Link className="navbar-brand" to={getPathByName("login")}>
+                <Link
+                  data-testid="login-button"
+                  className="navbar-brand"
+                  to={getPathByName("login")}
+                >
                   Login
                 </Link>
               </li>

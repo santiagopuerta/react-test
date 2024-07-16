@@ -26,7 +26,7 @@ export function Post({ post, user }: PostProps) {
   }
 
   return (
-    <div className="card my-2">
+    <div data-testid="post" className="card my-2">
       <div className="card-body">
         {isEditing ? (
           <>
@@ -57,19 +57,28 @@ export function Post({ post, user }: PostProps) {
           </>
         ) : (
           <>
-            <h5 className="card-title">{post.title}</h5>
-            <p className="card-text">{post.body}</p>
+            <h5 data-testid="post-title" className="card-title">
+              {post.title}
+            </h5>
+            <p data-testid="post-body" className="card-text">
+              {post.body}
+            </p>
             <span className="badge text-bg-secondary">{user.name}</span>
             <span className="mx-3"></span>
             {userEmail && (
               <>
                 <button
+                  data-testid="edit-button"
                   className="btn btn-info mx-2"
                   onClick={() => setIsEditing(true)}
                 >
                   Edit Post
                 </button>
-                <button className="btn btn-danger mx-2" onClick={handleDelete}>
+                <button
+                  data-testid="delete-button"
+                  className="btn btn-danger mx-2"
+                  onClick={handleDelete}
+                >
                   Delete Post
                 </button>
               </>

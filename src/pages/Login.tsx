@@ -34,10 +34,11 @@ export function Login() {
     <Layout>
       <div className="login">
         <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid="login-form">
           <div className="form-group mt-3">
             <label htmlFor="email">Email:</label>
             <input
+              data-testid="email-input"
               type="email"
               id="email"
               className="form-control"
