@@ -1,6 +1,6 @@
 import Home from "../pages/Home"
 import Login from "../pages/Login"
-import { RouteItem } from "../types"
+import { RouteItem } from "../interfaces"
 
 export const RouteConfig: RouteItem[] = [
   {

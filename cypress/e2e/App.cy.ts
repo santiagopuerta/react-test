@@ -1,4 +1,6 @@
 describe("App", () => {
+	const USER_EMAIL = "test@test.com"
+
   beforeEach(() => {
     cy.visit(Cypress.env("BASE_URL"))
     cy.intercept("GET", "/posts").as("getPosts")
@@ -25,14 +27,14 @@ describe("App", () => {
 
   it("Check if entering email in login form navigates to home", () => {
     cy.visit(Cypress.env("BASE_URL") + "login")
-    cy.get('[data-testid="email-input"]').type("test@test.com")
+    cy.get('[data-testid="email-input"]').type(USER_EMAIL)
     cy.get('[data-testid="login-form"]').submit()
     cy.location("pathname").should("eq", "/")
   })
 
   it("Check if edit and delete buttons are displayed in each post after login", () => {
     cy.visit(Cypress.env("BASE_URL") + "login")
-    cy.get('[data-testid="email-input"]').type("test@test.com")
+    cy.get('[data-testid="email-input"]').type(USER_EMAIL)
     cy.get('[data-testid="login-form"]').submit()
     cy.location("pathname").should("eq", "/")
     cy.get('[data-testid="post"]').each(($post) => {
@@ -42,37 +44,34 @@ describe("App", () => {
   })
 
   it("Check if user email is displayed in navbar after login", () => {
-    const userEmail = "test@test.com"
     cy.visit(Cypress.env("BASE_URL") + "login")
-    cy.get('[data-testid="email-input"]').type(userEmail)
+    cy.get('[data-testid="email-input"]').type(USER_EMAIL)
     cy.get('[data-testid="login-form"]').submit()
     cy.location("pathname").should("eq", "/")
     cy.get('[data-testid="navbar"]').within(() => {
-      cy.get('[data-testid="user-email"]').should("contain", userEmail)
+      cy.get('[data-testid="user-email"]').should("contain", USER_EMAIL)
     })
   })
 
   it("Check if logout button is displayed in dropdown after login", () => {
-    const userEmail = "test@test.com"
     cy.visit(Cypress.env("BASE_URL") + "login")
-    cy.get('[data-testid="email-input"]').type(userEmail)
+    cy.get('[data-testid="email-input"]').type(USER_EMAIL)
     cy.get('[data-testid="login-form"]').submit()
     cy.location("pathname").should("eq", "/")
     cy.get('[data-testid="user-email"]').click()
     cy.get('[data-testid="logout-button"]').should("be.visible")
   })
 
-  it("Check if session is closed after clicking logout button", () => {
-    const userEmail = "test@test.com"
-    cy.visit(Cypress.env("BASE_URL") + "login")
-    cy.get('[data-testid="email-input"]').type(userEmail)
+	it("Check if session is closed after clicking logout button", () => {
+    cy.visit(Cypress.env('BASE_URL') + 'login')
+    cy.get('[data-testid="email-input"]').type(USER_EMAIL)
     cy.get('[data-testid="login-form"]').submit()
-    cy.location("pathname").should("eq", "/")
+    cy.location('pathname').should('eq', '/')
     cy.get('[data-testid="user-email"]').click()
     cy.get('[data-testid="logout-button"]').click()
-    cy.get('[data-testid="user-email"]').should("not.exist")
+    cy.get('[data-testid="user-email"]').should('not.exist')
     cy.window().then((win) => {
-      expect(win.localStorage.getItem("email")).to.be.null
+        expect(win.localStorage.getItem('email')).to.be.null
     })
-  })
+	})
 })

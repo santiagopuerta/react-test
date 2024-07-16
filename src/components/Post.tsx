@@ -21,7 +21,7 @@ export function Post({ post, user }: PostProps) {
   }
 
   const handleEdit = () => {
-    dispatch(editPost({ id: post.id, ...editedPost }))
+    dispatch(editPost({ id: post.id, userId: 0, ...editedPost }))
     setIsEditing(false)
   }
 
